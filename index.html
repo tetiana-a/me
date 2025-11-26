@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Choose Your Path</title>
     <style>
         * {
@@ -24,9 +24,12 @@
             --quantum-pink: #ff00aa;
         }
 
+        /* ANIMATED NEON BACKGROUND */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, var(--black) 0%, var(--gray-dark) 100%);
+            background: radial-gradient(circle at 0% 0%, #2b0040 0%, #02020a 45%, #000000 100%);
+            background-size: 200% 200%;
+            animation: neonGradient 20s ease-in-out infinite;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -37,7 +40,13 @@
             touch-action: manipulation;
         }
 
-        /* Responsive Background Animation */
+        @keyframes neonGradient {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Background particles */
         .background-animation {
             position: fixed;
             top: 0;
@@ -45,7 +54,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.05;
+            opacity: 0.08;
         }
 
         .particle {
@@ -99,7 +108,7 @@
             }
         }
 
-        /* Responsive Header */
+        /* Header */
         .header {
             text-align: center;
             margin-bottom: clamp(20px, 5vw, 60px);
@@ -131,7 +140,7 @@
             text-transform: uppercase;
         }
 
-        /* Responsive 5D Balls Container */
+        /* Balls Container */
         .balls-container {
             display: flex;
             gap: clamp(20px, 5vw, 100px);
@@ -145,7 +154,6 @@
             max-width: 100%;
         }
 
-        /* Responsive Ball Wrapper */
         .ball-wrapper {
             position: relative;
             width: clamp(120px, 25vw, 300px);
@@ -155,7 +163,6 @@
             flex-shrink: 0;
         }
 
-        /* Responsive 5D Ball */
         .ball {
             width: 100%;
             height: 100%;
@@ -167,7 +174,7 @@
             cursor: pointer;
             position: relative;
             transform-style: preserve-3d;
-            animation: 
+            animation:
                 rotate5d 20s infinite linear,
                 morph5d 8s infinite ease-in-out alternate,
                 breathe5d 4s infinite ease-in-out alternate;
@@ -180,12 +187,12 @@
             transform: scale(1.15) rotateY(180deg) rotateX(20deg) translateZ(50px);
         }
 
-        /* Black 5D Ball */
+        /* Black Ball */
         .ball-black {
-            background: 
+            background:
                 radial-gradient(circle at 30% 30%, #2a2a2a, var(--black) 70%),
                 linear-gradient(135deg, #2a2a2a, var(--black));
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.5),
                 inset -10px -10px 30px rgba(255, 255, 255, 0.1),
                 inset 10px 10px 30px rgba(0, 0, 0, 0.8),
@@ -194,7 +201,7 @@
         }
 
         .ball-black:hover {
-            box-shadow: 
+            box-shadow:
                 0 30px 80px rgba(0, 0, 0, 0.7),
                 0 0 60px rgba(255, 255, 255, 0.2),
                 inset -10px -10px 30px rgba(255, 255, 255, 0.2),
@@ -202,12 +209,12 @@
                 0 0 0 3px rgba(255, 255, 255, 0.2);
         }
 
-        /* White 5D Ball */
+        /* White Ball */
         .ball-white {
-            background: 
+            background:
                 radial-gradient(circle at 30% 30%, var(--white), var(--gray-light) 70%),
                 linear-gradient(135deg, var(--gray-light), var(--white));
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(255, 255, 255, 0.3),
                 inset -10px -10px 30px rgba(0, 0, 0, 0.1),
                 inset 10px 10px 30px rgba(255, 255, 255, 0.8),
@@ -216,7 +223,7 @@
         }
 
         .ball-white:hover {
-            box-shadow: 
+            box-shadow:
                 0 30px 80px rgba(255, 255, 255, 0.5),
                 0 0 60px rgba(0, 0, 0, 0.2),
                 inset -10px -10px 30px rgba(0, 0, 0, 0.2),
@@ -224,7 +231,35 @@
                 0 0 0 3px rgba(0, 0, 0, 0.2);
         }
 
-        /* Responsive Text on Balls */
+        /* HEART BALL → GitHub */
+        .ball-heart {
+            background:
+                radial-gradient(circle at 30% 30%, #ff53b6, #5500ff 70%),
+                linear-gradient(145deg, #ff0080, #00d0ff);
+            box-shadow:
+                0 0 40px rgba(255, 0, 170, 0.8),
+                0 0 80px rgba(0, 200, 255, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            animation:
+                rotate5d 18s infinite linear,
+                morph5d 7s infinite ease-in-out alternate,
+                heartbeat 1.3s infinite ease-in-out;
+        }
+
+        .ball-heart:hover {
+            box-shadow:
+                0 0 60px rgba(255, 0, 170, 1),
+                0 0 100px rgba(0, 200, 255, 0.9);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) rotateY(0deg); }
+            20%      { transform: scale(1.12) rotateY(10deg); }
+            40%      { transform: scale(0.98) rotateY(0deg); }
+            60%      { transform: scale(1.08) rotateY(-10deg); }
+            80%      { transform: scale(1) rotateY(0deg); }
+        }
+
         .ball-text {
             font-size: clamp(0.7rem, 2.5vw, 1.3rem);
             font-weight: 600;
@@ -248,12 +283,16 @@
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
         }
 
+        .ball-heart .ball-text {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 0, 170, 0.9);
+        }
+
         .ball:hover .ball-text {
             transform: scale(1.1);
             letter-spacing: 2px;
         }
 
-        /* Responsive Icons */
         .ball-icon {
             font-size: clamp(1.5rem, 4vw, 3rem);
             margin-bottom: clamp(8px, 2vw, 15px);
@@ -261,11 +300,14 @@
             animation: icon-rotate 10s infinite linear;
         }
 
+        .ball-heart .ball-icon {
+            animation: none;
+        }
+
         .ball:hover .ball-icon {
             transform: scale(1.2) rotate(720deg);
         }
 
-        /* Responsive Pulse Ring */
         .pulse-ring {
             position: absolute;
             top: 50%;
@@ -276,7 +318,7 @@
             border-radius: 50%;
             border: 2px solid;
             opacity: 0;
-            animation: 
+            animation:
                 pulse5d 2s infinite,
                 pulse-rotate 5s infinite linear;
             pointer-events: none;
@@ -290,7 +332,10 @@
             border-color: var(--black);
         }
 
-        /* Responsive Quantum Field */
+        .ball-heart .pulse-ring {
+            border-color: rgba(255, 0, 170, 0.9);
+        }
+
         .quantum-field {
             position: absolute;
             top: 0;
@@ -322,7 +367,6 @@
             opacity: 0.3;
         }
 
-        /* Responsive Particle Emitter */
         .particle-emitter {
             position: absolute;
             top: 50%;
@@ -338,61 +382,27 @@
             animation: emit-particles 2s infinite;
         }
 
-        /* 5D Animations - Performance Optimized */
+        /* 5D Animations */
         @keyframes rotate5d {
-            0% {
-                transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
-            }
-            25% {
-                transform: rotateY(90deg) rotateX(15deg) rotateZ(5deg);
-            }
-            50% {
-                transform: rotateY(180deg) rotateX(0deg) rotateZ(10deg);
-            }
-            75% {
-                transform: rotateY(270deg) rotateX(-15deg) rotateZ(5deg);
-            }
-            100% {
-                transform: rotateY(360deg) rotateX(0deg) rotateZ(0deg);
-            }
+            0%   { transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
+            25%  { transform: rotateY(90deg) rotateX(15deg) rotateZ(5deg); }
+            50%  { transform: rotateY(180deg) rotateX(0deg) rotateZ(10deg); }
+            75%  { transform: rotateY(270deg) rotateX(-15deg) rotateZ(5deg); }
+            100% { transform: rotateY(360deg) rotateX(0deg) rotateZ(0deg); }
         }
 
         @keyframes morph5d {
-            0% {
-                border-radius: 50%;
-                transform: scale(1) rotateY(0deg);
-            }
-            25% {
-                border-radius: 45% 55% 50% 50%;
-                transform: scale(1.05) rotateY(90deg);
-            }
-            50% {
-                border-radius: 50% 50% 45% 55%;
-                transform: scale(0.95) rotateY(180deg);
-            }
-            75% {
-                border-radius: 55% 45% 50% 50%;
-                transform: scale(1.02) rotateY(270deg);
-            }
-            100% {
-                border-radius: 50%;
-                transform: scale(1) rotateY(360deg);
-            }
+            0%   { border-radius: 50%; transform: scale(1) rotateY(0deg); }
+            25%  { border-radius: 45% 55% 50% 50%; transform: scale(1.05) rotateY(90deg); }
+            50%  { border-radius: 50% 50% 45% 55%; transform: scale(0.95) rotateY(180deg); }
+            75%  { border-radius: 55% 45% 50% 50%; transform: scale(1.02) rotateY(270deg); }
+            100% { border-radius: 50%; transform: scale(1) rotateY(360deg); }
         }
 
         @keyframes breathe5d {
-            0% {
-                transform: translateZ(0px) scale(1);
-                filter: brightness(1);
-            }
-            50% {
-                transform: translateZ(20px) scale(1.05);
-                filter: brightness(1.1);
-            }
-            100% {
-                transform: translateZ(0px) scale(1);
-                filter: brightness(1);
-            }
+            0%   { transform: translateZ(0px) scale(1);   filter: brightness(1); }
+            50%  { transform: translateZ(20px) scale(1.05); filter: brightness(1.1); }
+            100% { transform: translateZ(0px) scale(1);   filter: brightness(1); }
         }
 
         @keyframes pulse5d {
@@ -416,68 +426,37 @@
         }
 
         @keyframes quantum-rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes text-glow {
-            0% {
-                text-shadow: 0 0 5px currentColor;
-            }
-            100% {
-                text-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
-            }
+            0%   { text-shadow: 0 0 5px currentColor; }
+            100% { text-shadow: 0 0 15px currentColor, 0 0 25px currentColor; }
         }
 
         @keyframes icon-rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes emit-particles {
-            0% {
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+            0%   { opacity: 0; }
+            10%  { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         /* Standard Animations */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-50px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive 5D Click Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -504,7 +483,7 @@
             }
         }
 
-        /* Responsive Control Panel */
+        /* Control Panel */
         .control-panel {
             position: fixed;
             top: clamp(10px, 2vw, 20px);
@@ -546,7 +525,6 @@
             border-color: var(--quantum-blue);
         }
 
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
@@ -563,7 +541,6 @@
             font-size: clamp(1rem, 3vw, 1.2rem);
         }
 
-        /* Loader */
         .loader {
             position: fixed;
             top: 0;
@@ -593,12 +570,9 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
-        /* Responsive Footer */
         .footer {
             position: absolute;
             bottom: clamp(10px, 2vw, 20px);
@@ -610,7 +584,6 @@
             padding: 0 clamp(10px, 3vw, 20px);
         }
 
-        /* Custom Cursor - Desktop Only */
         .custom-cursor {
             position: fixed;
             width: 20px;
@@ -630,28 +603,77 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Responsive Breakpoints */
+        /* ==== NEON MUSIC BUTTON ==== */
+        .music-toggle {
+            position: fixed;
+            bottom: clamp(15px, 3vw, 25px);
+            left: clamp(15px, 3vw, 25px);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: radial-gradient(circle at 30% 30%, #ff53b6, #00d0ff);
+            box-shadow:
+                0 0 15px rgba(255, 0, 170, 0.7),
+                0 0 30px rgba(0, 200, 255, 0.6);
+            color: #ffffff;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 120;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
 
-        /* Extra Small Devices (Phones in portrait) */
+        .music-toggle:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow:
+                0 0 22px rgba(255, 0, 170, 0.9),
+                0 0 40px rgba(0, 200, 255, 0.9);
+        }
+
+        .music-toggle.playing {
+            box-shadow:
+                0 0 25px rgba(0, 255, 160, 0.9),
+                0 0 60px rgba(0, 200, 255, 1);
+            border-color: rgba(0, 255, 160, 0.9);
+            animation: musicPulse 1.4s infinite ease-in-out;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            30%      { transform: scale(1.08); }
+            60%      { transform: scale(0.96); }
+        }
+
+        @media (max-width: 480px) {
+            .music-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                bottom: 12px;
+                left: 12px;
+            }
+        }
+
+        /* MEDIA QUERIES (как в предыдущем коде) */
         @media (max-width: 480px) {
             .balls-container {
                 flex-direction: column;
                 gap: clamp(30px, 8vw, 40px);
             }
-
             .ball-wrapper {
                 width: clamp(100px, 35vw, 150px);
                 height: clamp(100px, 35vw, 150px);
             }
-
             .title {
                 font-size: clamp(1.5rem, 7vw, 2rem);
             }
-
             .subtitle {
                 font-size: clamp(0.7rem, 3vw, 0.9rem);
             }
-
             .control-panel {
                 top: auto;
                 bottom: clamp(60px, 15vw, 80px);
@@ -662,127 +684,104 @@
                 justify-content: center;
                 padding: clamp(8px, 2vw, 10px);
             }
-
             .control-button {
                 flex: 1;
                 text-align: center;
                 font-size: clamp(0.5rem, 2vw, 0.6rem);
                 padding: clamp(5px, 1.5vw, 6px) clamp(6px, 2vw, 8px);
             }
-
             .mobile-menu-toggle {
                 display: block;
             }
-
             .custom-cursor {
                 display: none;
             }
-
             .ball {
-                animation-duration: 25s, 10s, 5s; /* Slower animations for mobile */
+                animation-duration: 25s, 10s, 5s;
             }
         }
 
-        /* Small Devices (Phones in landscape) */
         @media (max-width: 768px) and (orientation: landscape) {
             .header {
                 margin-bottom: clamp(10px, 2vw, 20px);
             }
-
             .balls-container {
                 gap: clamp(15px, 4vw, 30px);
             }
-
             .ball-wrapper {
                 width: clamp(80px, 20vw, 120px);
                 height: clamp(80px, 20vw, 120px);
             }
-
             .control-panel {
                 top: clamp(5px, 1vw, 10px);
                 right: clamp(5px, 1vw, 10px);
                 padding: clamp(5px, 1vw, 8px);
             }
-
             .control-button {
                 font-size: clamp(0.5rem, 1.5vw, 0.7rem);
                 padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 8px);
             }
         }
 
-        /* Medium Devices (Tablets) */
         @media (min-width: 768px) and (max-width: 1024px) {
             .balls-container {
                 gap: clamp(30px, 6vw, 60px);
             }
-
             .ball-wrapper {
                 width: clamp(140px, 22vw, 200px);
                 height: clamp(140px, 22vw, 200px);
             }
-
             .title {
                 font-size: clamp(2rem, 5vw, 3rem);
             }
-
             .subtitle {
                 font-size: clamp(0.9rem, 2.5vw, 1.2rem);
             }
-
             .control-panel {
                 font-size: clamp(0.8rem, 1.8vw, 0.9rem);
             }
         }
 
-        /* Large Devices (Desktops) */
         @media (min-width: 1024px) and (max-width: 1440px) {
             .balls-container {
                 gap: clamp(40px, 5vw, 80px);
             }
-
             .ball-wrapper {
                 width: clamp(180px, 18vw, 250px);
                 height: clamp(180px, 18vw, 250px);
             }
         }
 
-        /* Extra Large Devices (Ultra-wide) */
         @media (min-width: 1440px) {
             .balls-container {
                 gap: clamp(60px, 4vw, 120px);
             }
-
             .ball-wrapper {
                 width: clamp(250px, 15vw, 350px);
                 height: clamp(250px, 15vw, 350px);
             }
-
             .title {
                 font-size: clamp(3rem, 4vw, 5rem);
             }
-
             .subtitle {
                 font-size: clamp(1.2rem, 2vw, 1.8rem);
             }
-
             .control-panel {
                 font-size: clamp(0.9rem, 1.2vw, 1rem);
                 padding: clamp(12px, 1.5vw, 20px);
             }
         }
 
-        /* High DPI Displays */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
             .ball {
-                box-shadow: 
+                box-shadow:
                     0 20px 60px rgba(0, 0, 0, 0.5),
                     inset -10px -10px 30px rgba(255, 255, 255, 0.1),
                     inset 10px 10px 30px rgba(0, 0, 0, 0.8),
                     0 0 0 1px rgba(255, 255, 255, 0.1);
             }
-
             .ball-black:hover {
-                box-shadow: 
+                box-shadow:
                     0 30px 80px rgba(0, 0, 0, 0.7),
                     0 0 60px rgba(255, 255, 255, 0.2),
                     inset -10px -10px 30px rgba(255, 255, 255, 0.2),
@@ -791,70 +790,52 @@
             }
         }
 
-        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
-            .ball {
-                animation: none;
-            }
-
-            .particle {
-                animation: none;
-            }
-
-            .quantum-particle {
-                animation: none;
-            }
-
+            .ball,
+            .particle,
+            .quantum-particle,
             .quantum-wave {
                 animation: none;
             }
-
             .ball:hover {
                 transform: scale(1.1);
             }
         }
 
-        /* Touch Device Optimizations */
         @media (hover: none) and (pointer: coarse) {
             .ball {
                 transition: transform 0.3s ease;
             }
-
             .ball:active {
                 transform: scale(0.95);
             }
-
             .ball:hover {
                 animation-play-state: running;
                 transform: scale(1.05);
             }
-
             .control-button {
-                min-height: 44px; /* Touch target size */
+                min-height: 44px;
                 min-width: 44px;
             }
         }
 
-        /* Print Styles */
         @media print {
             body {
                 background: white;
                 color: black;
             }
-
             .background-animation,
             .control-panel,
             .custom-cursor,
-            .loader {
+            .loader,
+            .music-toggle {
                 display: none;
             }
-
             .ball {
                 background: white !important;
                 border: 2px solid black !important;
                 box-shadow: none !important;
             }
-
             .ball-text {
                 color: black !important;
             }
@@ -867,7 +848,17 @@
         <div class="loader-circle"></div>
     </div>
 
-    <!-- Responsive Background Animation -->
+    <!-- Background Music (замени music.mp3 на свой файл или URL) -->
+    <audio id="bgMusic" loop>
+        <source src="333.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Neon Music Toggle -->
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+        ♪
+    </button>
+
+    <!-- Background Animation -->
     <div class="background-animation" id="bgAnimation"></div>
 
     <!-- Custom Cursor (Desktop Only) -->
@@ -876,7 +867,7 @@
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" id="mobileMenuToggle">⚙️</button>
 
-    <!-- Responsive Control Panel -->
+    <!-- Control Panel -->
     <div class="control-panel" id="controlPanel">
         <button class="control-button active" id="toggle5d">5D Mode</button>
         <button class="control-button" id="toggleQuantum">Quantum</button>
@@ -889,9 +880,9 @@
         <p class="subtitle">Two Worlds — One Choice</p>
     </header>
 
-    <!-- Responsive 5D Balls Container -->
+    <!-- Balls -->
     <main class="balls-container">
-        <!-- Black 5D Ball -->
+        <!-- Black Ball -->
         <div class="ball-wrapper">
             <div class="ball ball-black" onclick="navigateTo('https://tetiana-a.github.io/senioraA/')">
                 <div class="quantum-field">
@@ -904,7 +895,7 @@
             </div>
         </div>
 
-        <!-- White 5D Ball -->
+        <!-- White Ball -->
         <div class="ball-wrapper">
             <div class="ball ball-white" onclick="navigateTo('https://tetiana-a.github.io/seniora/')">
                 <div class="quantum-field">
@@ -916,15 +907,26 @@
                 <div class="ball-text">Choose Me</div>
             </div>
         </div>
+
+        <!-- HEART BALL → GitHub -->
+        <div class="ball-wrapper">
+            <div class="ball ball-heart" onclick="navigateTo('https://github.com/tetiana-a')">
+                <div class="quantum-field">
+                    <div class="quantum-wave"></div>
+                </div>
+                <div class="pulse-ring"></div>
+                <div class="ball-icon">❤️</div>
+                <div class="ball-text">Game easy</div>
+            </div>
+        </div>
     </main>
 
-    <!-- Responsive Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <p>© 2025 | 5D Quantum Experience</p>
     </footer>
 
     <script>
-        // Device Detection and Optimization
         const device = {
             isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
             isTablet: /iPad|Android(?!.*Mobile)/i.test(navigator.userAgent),
@@ -936,7 +938,6 @@
             orientation: window.orientation || 'portrait'
         };
 
-        // 5D State Management
         const state5D = {
             mode5d: true,
             quantumField: false,
@@ -947,81 +948,64 @@
             performanceMode: device.isMobile || device.prefersReducedMotion
         };
 
-        // Initialize
+        let musicPlaying = false;
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Hide loader
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 800);
 
-            // Create background particles based on device performance
             createBackgroundParticles();
 
-            // Initialize custom cursor for desktop only
             if (!device.isTouch) {
                 initCustomCursor();
             }
 
-            // Add click effects
             addClickEffects();
-
-            // Initialize 5D effects
             init5DEffects();
-
-            // Initialize control panel
             initControlPanel();
-
-            // Initialize mobile menu
             initMobileMenu();
-
-            // Start animation loop with performance optimization
+            initMusicToggle();
             startAnimationLoop();
-
-            // Handle orientation changes
             handleOrientationChange();
-
-            // Optimize for device
             optimizeForDevice();
         });
 
-        // Create background particles with performance optimization
         function createBackgroundParticles() {
             const bgAnimation = document.getElementById('bgAnimation');
             const particleCount = device.isMobile ? 20 : 50;
             const quantumCount = device.isMobile ? 8 : 20;
 
-            // Regular particles
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                
+
                 const size = Math.random() * (device.isMobile ? 3 : 4) + 1;
                 const left = Math.random() * 100;
                 const delay = Math.random() * 20;
                 const duration = Math.random() * 20 + 10;
-                
+
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${left}%`;
                 particle.style.animationDelay = `${delay}s`;
                 particle.style.animationDuration = `${duration}s`;
-                
+
                 bgAnimation.appendChild(particle);
             }
 
-            // Quantum particles (reduced on mobile)
             for (let i = 0; i < quantumCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'quantum-particle';
-                
+
                 const size = Math.random() * (device.isMobile ? 4 : 6) + 2;
                 const left = Math.random() * 100;
                 const delay = Math.random() * 15;
                 const duration = Math.random() * 15 + 10;
-                
+
                 const colors = ['var(--quantum-blue)', 'var(--quantum-purple)', 'var(--quantum-pink)'];
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                
+
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${left}%`;
@@ -1029,12 +1013,11 @@
                 particle.style.boxShadow = `0 0 ${device.isMobile ? 5 : 10}px ${color}`;
                 particle.style.animationDelay = `${delay}s`;
                 particle.style.animationDuration = `${duration}s`;
-                
+
                 bgAnimation.appendChild(particle);
             }
         }
 
-        // Custom cursor for desktop only
         function initCustomCursor() {
             if (device.isTouch) return;
 
@@ -1049,30 +1032,22 @@
             });
 
             balls.forEach(ball => {
-                ball.addEventListener('mouseenter', () => {
-                    cursor.classList.add('hover');
-                });
-                
-                ball.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('hover');
-                });
+                ball.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                ball.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             });
         }
 
-        // 5D Click Effects with touch optimization
         function addClickEffects() {
             const balls = document.querySelectorAll('.ball');
 
             balls.forEach(ball => {
-                // Mouse events
                 ball.addEventListener('click', handleClick);
-                
-                // Touch events
+
                 ball.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     const touch = e.touches[0];
-                    handleClick({ 
-                        clientX: touch.clientX, 
+                    handleClick({
+                        clientX: touch.clientX,
                         clientY: touch.clientY,
                         target: ball
                     });
@@ -1083,12 +1058,17 @@
                 const ball = e.target.closest('.ball');
                 if (!ball) return;
 
-                // Create 5D ripple effect
                 const ripple = document.createElement('div');
                 ripple.className = 'ripple';
-                
+
                 const isBlack = ball.classList.contains('ball-black');
-                if (isBlack) {
+                const isHeart = ball.classList.contains('ball-heart');
+
+                if (isHeart) {
+                    ripple.style.background = 'rgba(255, 0, 170, 0.35)';
+                    ripple.style.border = '2px solid rgba(255, 255, 255, 0.7)';
+                    ripple.style.boxShadow = '0 0 30px rgba(255, 0, 170, 0.8)';
+                } else if (isBlack) {
                     ripple.style.background = 'rgba(255, 255, 255, 0.3)';
                     ripple.style.border = '2px solid rgba(255, 255, 255, 0.5)';
                     ripple.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.5)';
@@ -1097,36 +1077,31 @@
                     ripple.style.border = '2px solid rgba(0, 0, 0, 0.3)';
                     ripple.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
                 }
-                
+
                 const rect = ball.getBoundingClientRect();
                 ripple.style.left = (e.clientX - rect.left) + 'px';
                 ripple.style.top = (e.clientY - rect.top) + 'px';
-                
-                ball.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 800);
 
-                // Create particle burst (reduced on mobile)
+                ball.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 800);
+
                 if (state5D.particleEmission && !device.isMobile) {
                     createParticleBurst(e.clientX, e.clientY, isBlack);
                 }
 
-                // Haptic feedback on mobile
                 if (device.isMobile && navigator.vibrate) {
                     navigator.vibrate(50);
                 }
             }
         }
 
-        // Create particle burst effect (performance optimized)
         function createParticleBurst(x, y, isBlack) {
-            if (device.isMobile) return; // Skip on mobile for performance
+            if (device.isMobile) return;
 
             const particleCount = device.isHighDPI ? 30 : 20;
             const color = isBlack ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)';
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.style.position = 'fixed';
@@ -1138,58 +1113,57 @@
                 particle.style.top = y + 'px';
                 particle.style.pointerEvents = 'none';
                 particle.style.zIndex = '9999';
-                
+
                 document.body.appendChild(particle);
-                
+
                 const angle = (Math.PI * 2 * i) / particleCount;
                 const velocity = 5 + Math.random() * 5;
                 const vx = Math.cos(angle) * velocity;
                 const vy = Math.sin(angle) * velocity;
-                
+
                 let posX = x;
                 let posY = y;
                 let opacity = 1;
-                
+
                 const animateParticle = () => {
                     posX += vx;
                     posY += vy;
                     opacity -= 0.02;
-                    
+
                     particle.style.left = posX + 'px';
                     particle.style.top = posY + 'px';
                     particle.style.opacity = opacity;
-                    
+
                     if (opacity > 0) {
                         requestAnimationFrame(animateParticle);
                     } else {
                         document.body.removeChild(particle);
                     }
                 };
-                
+
                 requestAnimationFrame(animateParticle);
             }
         }
 
-        // Initialize 5D Effects with device optimization
         function init5DEffects() {
-            if (device.isTouch) return; // Skip complex interactions on touch devices
+            if (device.isTouch) return;
 
             const balls = document.querySelectorAll('.ball');
-            
-            balls.forEach((ball, index) => {
+
+            balls.forEach((ball) => {
                 ball.addEventListener('mousemove', (e) => {
                     if (!state5D.mode5d) return;
-                    
+
                     const rect = ball.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    
+
                     const rotateY = (x / rect.width) * 30;
                     const rotateX = -(y / rect.height) * 30;
-                    
+
                     ball.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.1)`;
                 });
-                
+
                 ball.addEventListener('mouseleave', () => {
                     if (!state5D.mode5d) return;
                     ball.style.transform = '';
@@ -1197,16 +1171,15 @@
             });
         }
 
-        // Initialize Control Panel with mobile optimization
         function initControlPanel() {
             const toggle5d = document.getElementById('toggle5d');
             const toggleQuantum = document.getElementById('toggleQuantum');
             const toggleParticles = document.getElementById('toggleParticles');
-            
+
             toggle5d.addEventListener('click', () => {
                 state5D.mode5d = !state5D.mode5d;
                 toggle5d.classList.toggle('active');
-                
+
                 const balls = document.querySelectorAll('.ball');
                 balls.forEach(ball => {
                     if (state5D.mode5d && !state5D.performanceMode) {
@@ -1216,24 +1189,24 @@
                     }
                 });
             });
-            
+
             toggleQuantum.addEventListener('click', () => {
                 state5D.quantumField = !state5D.quantumField;
                 toggleQuantum.classList.toggle('active');
-                
+
                 const quantumFields = document.querySelectorAll('.quantum-field');
                 quantumFields.forEach(field => {
                     field.style.display = state5D.quantumField ? 'block' : 'none';
                 });
             });
-            
+
             toggleParticles.addEventListener('click', () => {
                 state5D.particleEmission = !state5D.particleEmission;
                 toggleParticles.classList.toggle('active');
-                
+
                 const blackEmitter = document.getElementById('blackEmitter');
                 const whiteEmitter = document.getElementById('whiteEmitter');
-                
+
                 if (state5D.particleEmission && !device.isMobile) {
                     blackEmitter.classList.add('active');
                     whiteEmitter.classList.add('active');
@@ -1246,18 +1219,16 @@
             });
         }
 
-        // Initialize Mobile Menu
         function initMobileMenu() {
             const mobileToggle = document.getElementById('mobileMenuToggle');
             const controlPanel = document.getElementById('controlPanel');
-            
+
             if (!mobileToggle) return;
-            
+
             mobileToggle.addEventListener('click', () => {
                 controlPanel.style.display = controlPanel.style.display === 'none' ? 'flex' : 'none';
             });
-            
-            // Close menu when clicking outside
+
             document.addEventListener('click', (e) => {
                 if (!mobileToggle.contains(e.target) && !controlPanel.contains(e.target)) {
                     controlPanel.style.display = 'none';
@@ -1265,27 +1236,26 @@
             });
         }
 
-        // Particle emission (desktop only)
         let particleEmissionInterval;
-        
+
         function startParticleEmission() {
             if (device.isMobile) return;
-            
+
             particleEmissionInterval = setInterval(() => {
                 if (!state5D.particleEmission) return;
-                
+
                 const blackEmitter = document.getElementById('blackEmitter');
                 const whiteEmitter = document.getElementById('whiteEmitter');
-                
+
                 createEmissionParticle(blackEmitter, true);
                 createEmissionParticle(whiteEmitter, false);
             }, 200);
         }
-        
+
         function stopParticleEmission() {
             clearInterval(particleEmissionInterval);
         }
-        
+
         function createEmissionParticle(emitter, isBlack) {
             const particle = document.createElement('div');
             particle.style.position = 'absolute';
@@ -1297,67 +1267,63 @@
             particle.style.top = '50%';
             particle.style.transform = 'translate(-50%, -50%)';
             particle.style.pointerEvents = 'none';
-            
+
             emitter.appendChild(particle);
-            
+
             const angle = Math.random() * Math.PI * 2;
             const velocity = 2 + Math.random() * 3;
             const vx = Math.cos(angle) * velocity;
             const vy = Math.sin(angle) * velocity;
-            
+
             let posX = 0;
             let posY = 0;
             let opacity = 1;
-            
+
             const animateParticle = () => {
                 posX += vx;
                 posY += vy;
                 opacity -= 0.03;
-                
+
                 particle.style.left = `calc(50% + ${posX}px)`;
                 particle.style.top = `calc(50% + ${posY}px)`;
                 particle.style.opacity = opacity;
-                
+
                 if (opacity > 0) {
                     requestAnimationFrame(animateParticle);
                 } else {
                     emitter.removeChild(particle);
                 }
             };
-            
+
             requestAnimationFrame(animateParticle);
         }
 
-        // Animation Loop with performance optimization
         function startAnimationLoop() {
             const animate = () => {
                 state5D.time += 0.01;
-                
-                // Update 5D effects based on time (reduced on mobile)
+
                 if (state5D.mode5d && !device.isMobile) {
                     update5DEffects();
                 }
-                
+
                 requestAnimationFrame(animate);
             };
-            
+
             animate();
         }
-        
+
         function update5DEffects() {
             const balls = document.querySelectorAll('.ball');
-            
+
             balls.forEach((ball, index) => {
-                // Time-based morphing
                 const morphAmount = Math.sin(state5D.time + index) * 5;
                 const rotateAmount = Math.cos(state5D.time + index) * 2;
-                
+
                 if (!ball.matches(':hover')) {
                     ball.style.borderRadius = `${50 + morphAmount}%`;
                     ball.style.transform = `rotateZ(${rotateAmount}deg)`;
                 }
-                
-                // Update quantum field
+
                 if (state5D.quantumField) {
                     const quantumWave = ball.querySelector('.quantum-wave');
                     if (quantumWave) {
@@ -1368,15 +1334,13 @@
             });
         }
 
-        // Handle orientation changes
         function handleOrientationChange() {
             window.addEventListener('orientationchange', () => {
                 setTimeout(() => {
                     device.orientation = window.orientation || 'portrait';
                     device.width = window.innerWidth;
                     device.height = window.innerHeight;
-                    
-                    // Recalculate layout
+
                     const balls = document.querySelectorAll('.ball');
                     balls.forEach(ball => {
                         ball.style.transform = '';
@@ -1384,11 +1348,10 @@
                 }, 100);
             });
 
-            // Handle resize
             window.addEventListener('resize', () => {
                 device.width = window.innerWidth;
                 device.height = window.innerHeight;
-                
+
                 requestTick(() => {
                     const balls = document.querySelectorAll('.ball');
                     balls.forEach(ball => {
@@ -1398,9 +1361,7 @@
             });
         }
 
-        // Optimize for device
         function optimizeForDevice() {
-            // Reduce animations on mobile
             if (device.isMobile || state5D.performanceMode) {
                 const balls = document.querySelectorAll('.ball');
                 balls.forEach(ball => {
@@ -1408,7 +1369,6 @@
                 });
             }
 
-            // Disable particle emission on mobile
             if (device.isMobile) {
                 state5D.particleEmission = false;
                 const toggleParticles = document.getElementById('toggleParticles');
@@ -1417,10 +1377,6 @@
                     toggleParticles.style.opacity = '0.5';
                     toggleParticles.style.cursor = 'not-allowed';
                 }
-            }
-
-            // Adjust control panel for mobile
-            if (device.isMobile) {
                 const controlPanel = document.getElementById('controlPanel');
                 if (controlPanel) {
                     controlPanel.style.display = 'none';
@@ -1428,32 +1384,28 @@
             }
         }
 
-        // Navigate to selected site
         function navigateTo(url) {
-            // Add transition effect
             document.body.style.transition = 'opacity 0.5s ease';
             document.body.style.opacity = '0';
-            
-            // Navigate after short delay
+
             setTimeout(() => {
                 window.open(url, '_blank');
-                // Restore opacity for return
                 setTimeout(() => {
                     document.body.style.opacity = '1';
                 }, 100);
             }, 500);
         }
 
-        // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === '1' || e.key === 'ArrowLeft') {
                 navigateTo('https://tetiana-a.github.io/senioraA/');
             } else if (e.key === '2' || e.key === 'ArrowRight') {
                 navigateTo('https://tetiana-a.github.io/seniora/');
+            } else if (e.key === '3' || e.key.toLowerCase() === 'g') {
+                navigateTo('https://github.com/tetiana-a');
             }
         });
 
-        // Performance optimization
         let ticking = false;
         function requestTick(callback) {
             if (!ticking) {
@@ -1465,7 +1417,6 @@
             }
         }
 
-        // Prevent zoom on double tap for mobile
         if (device.isMobile) {
             let lastTouchEnd = 0;
             document.addEventListener('touchend', (e) => {
@@ -1475,6 +1426,35 @@
                 }
                 lastTouchEnd = now;
             }, false);
+        }
+
+        /* ==== MUSIC TOGGLE LOGIC ==== */
+        function initMusicToggle() {
+            const musicToggle = document.getElementById('musicToggle');
+            const bgMusic = document.getElementById('bgMusic');
+
+            if (!musicToggle || !bgMusic) return;
+
+            musicToggle.addEventListener('click', async () => {
+                try {
+                    if (!musicPlaying) {
+                        const playPromise = bgMusic.play();
+                        if (playPromise !== undefined) {
+                            await playPromise;
+                        }
+                        musicPlaying = true;
+                        musicToggle.classList.add('playing');
+                        musicToggle.textContent = '⏸';
+                    } else {
+                        bgMusic.pause();
+                        musicPlaying = false;
+                        musicToggle.classList.remove('playing');
+                        musicToggle.textContent = '♪';
+                    }
+                } catch (e) {
+                    console.warn('Music play error:', e);
+                }
+            });
         }
     </script>
 </body>
